@@ -18,6 +18,8 @@ for x in range(len(dirlist)):
   a1 = np.array(img.dataobj)[:,32,:]
   mnist[x,] = a1.ravel()
 os.chdir("/content/Adversarial_Autoencoder")
+sha1=a1.shape[0]
+sha2=a1.shape[1]
 
 # Progressbar
 # bar = progressbar.ProgressBar(widgets=['[', progressbar.Timer(), ']', progressbar.Bar(), '(', progressbar.ETA(), ')'])
@@ -80,7 +82,7 @@ def generate_image_grid(sess, op):
         z = np.reshape(z, (1, 2))
         x = sess.run(op, feed_dict={decoder_input: z})
         ax = plt.subplot(g)
-        img = np.array(x.tolist()).reshape(28, 28)
+        img = np.array(x.tolist()).reshape(sha1, sha2)
         ax.imshow(img, cmap='gray')
         ax.set_xticks([])
         ax.set_yticks([])
@@ -199,8 +201,8 @@ def train(train_model=True):
     init = tf.global_variables_initializer()
 
     # Reshape immages to display them
-    input_images = tf.reshape(x_input, [-1, 28, 28, 1])
-    generated_images = tf.reshape(decoder_output, [-1, 28, 28, 1])
+    input_images = tf.reshape(x_input, [-1, sha1, sha2, 1])
+    generated_images = tf.reshape(decoder_output, [-1, sha1, sha2, 1])
 
     # Tensorboard visualization
     tf.summary.scalar(name='Autoencoder Loss', tensor=autoencoder_loss)
