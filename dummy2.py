@@ -6,10 +6,10 @@ import matplotlib.pyplot as plt
 from matplotlib import gridspec
 #from tensorflow.examples.tutorials.mnist import input_data
 
-os.chdir("..")
-!git clone https://github.com/danielcanueto/abide
-os.chdir("abide")
-!python3 download_abide_preproc.py -d reho -p cpac -s nofilt_noglobal -o '/content/ABIDE_data'
+#os.chdir("..")
+#!git clone https://github.com/danielcanueto/abide
+#os.chdir("abide")
+#!python3 download_abide_preproc.py -d reho -p cpac -s nofilt_noglobal -o '/content/ABIDE_data'
 dirlist=os.listdir("/content/ABIDE_data/Outputs/cpac/nofilt_noglobal/reho/")
 mnist=np.zeros((len(dirlist),a2))
 for x in range(len(dirlist)):
