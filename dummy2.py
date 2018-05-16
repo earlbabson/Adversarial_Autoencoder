@@ -256,16 +256,3 @@ def train(train_model=True):
 
 if __name__ == '__main__':
     train(train_model=True)
-© 2018 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
-Contact GitHub
-API
-Training
-Shop
-Blog
-About
-Press h to open a hovercard with more details.
