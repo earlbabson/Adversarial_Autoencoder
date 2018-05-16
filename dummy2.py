@@ -38,6 +38,13 @@ learning_rate = 0.001
 beta1 = 0.9
 results_path = './Results/Adversarial_Autoencoder'
 
+def ceil(a,b):
+    return -(-a//b)
+
+n_samples = mnist.shape[0]
+n_batches = ceil(n_samples, ceil(n_samples, 100))
+
+
 # Placeholders for input data and the targets
 x_input = tf.placeholder(dtype=tf.float32, shape=[batch_size, input_dim], name='Input')
 x_target = tf.placeholder(dtype=tf.float32, shape=[batch_size, input_dim], name='Target')
@@ -251,11 +258,10 @@ def train(train_model=True):
             sess.run(init)
             writer = tf.summary.FileWriter(logdir=tensorboard_path, graph=sess.graph)
             for i in range(n_epochs):
-                n_batches = int(mnist.shape[0] / batch_size)
                 print("------------------Epoch {}/{}------------------".format(i, n_epochs))
                 for b in range(1, n_batches + 1):
                     z_real_dist = np.random.randn(batch_size, z_dim) * 5.
-                    batch_x, _ = mnist.next_batch(batch_size)
+                    batch_x = mnist[b * n_batches: (b+1) * n_batches]
                     sess.run(autoencoder_optimizer, feed_dict={x_input: batch_x, x_target: batch_x})
                     sess.run(discriminator_optimizer,
                              feed_dict={x_input: batch_x, x_target: batch_x, real_distribution: z_real_dist})
