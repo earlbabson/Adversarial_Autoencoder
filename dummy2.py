@@ -4,6 +4,7 @@ import datetime
 import os
 import matplotlib.pyplot as plt
 from matplotlib import gridspec
+import nibabel as nib
 #from tensorflow.examples.tutorials.mnist import input_data
 
 #os.chdir("..")
