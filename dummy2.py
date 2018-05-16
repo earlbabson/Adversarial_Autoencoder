@@ -24,7 +24,7 @@ os.chdir("/content/Adversarial_Autoencoder")
 
 # Get the MNIST data
 #mnist = input_data.read_data_sets('./Data', one_hot=True)
-
+print(mnist.shape)
 # Parameters
 input_dim = mnist.shape[1]
 n_l1 = 1000
