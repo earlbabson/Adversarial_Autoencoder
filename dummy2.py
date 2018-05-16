@@ -11,7 +11,7 @@ from matplotlib import gridspec
 #os.chdir("abide")
 #!python3 download_abide_preproc.py -d reho -p cpac -s nofilt_noglobal -o '/content/ABIDE_data'
 dirlist=os.listdir("/content/ABIDE_data/Outputs/cpac/nofilt_noglobal/reho/")
-mnist=np.zeros((len(dirlist),a2))
+mnist=np.zeros((len(dirlist),3721))
 for x in range(len(dirlist)):
   img = nib.load(os.path.join("/content/ABIDE_data/Outputs/cpac/nofilt_noglobal/reho/", dirlist[x]))
   a1 = np.array(img.dataobj)[:,32,:]
