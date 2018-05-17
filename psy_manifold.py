@@ -268,7 +268,7 @@ def train(train_model=True):
                     sess.run(discriminator_optimizer,
                              feed_dict={x_input: batch_x, x_target: batch_x, real_distribution: z_real_dist})
                     sess.run(generator_optimizer, feed_dict={x_input: batch_x, x_target: batch_x})
-                    if b % 26 == 0:
+                    if b % 5 == 0:
                         a_loss, d_loss, g_loss, summary = sess.run(
                             [autoencoder_loss, dc_loss, generator_loss, summary_op],
                             feed_dict={x_input: batch_x, x_target: batch_x,
