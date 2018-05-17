@@ -32,7 +32,7 @@ input_dim = mnist.shape[1]
 n_l1 = 1000
 n_l2 = 1000
 z_dim = 2
-batch_size = 100
+#batch_size = 100
 n_epochs = 100
 learning_rate = 0.001
 beta1 = 0.9
@@ -42,8 +42,7 @@ def ceil(a,b):
     return -(-a//b)
 
 n_samples = mnist.shape[0]
-n_batches = ceil(n_samples, ceil(n_samples, 100))
-batch_size = n_batches
+batch_size = ceil(n_samples, ceil(n_samples, 100))
 
 # Placeholders for input data and the targets
 x_input = tf.placeholder(dtype=tf.float32, shape=[batch_size, input_dim], name='Input')
@@ -262,14 +261,9 @@ def train(train_model=True):
             writer = tf.summary.FileWriter(logdir=tensorboard_path, graph=sess.graph)
             for i in range(n_epochs):
                 print("------------------Epoch {}/{}------------------".format(i, n_epochs))
-                for b in range(1, n_batches + 1):
+                for b in range(1, batch_size + 1):
                     z_real_dist = np.random.randn(batch_size, z_dim) * 5.
-                    batch_x = mnist[b * n_batches: (b+1) * n_batches]
-                    print(b)
-                    print(n_batches)
-                    print(batch_x.shape)
-                    print(x_input.shape)
-                    print(x_target.shape)
+                    batch_x = mnist[b * batch_size: (b+1) * batch_size]
                     sess.run(autoencoder_optimizer, feed_dict={x_input: batch_x, x_target: batch_x})
                     sess.run(discriminator_optimizer,
                              feed_dict={x_input: batch_x, x_target: batch_x, real_distribution: z_real_dist})
