@@ -264,8 +264,6 @@ def train(train_model=True):
                 for b in range(0, n_batches):
                     z_real_dist = np.random.randn(batch_size, z_dim) * 5.
                     batch_x = mnist[b * batch_size: (b+1) * batch_size]
-                    print(b * batch_size)
-                    print((b+1) * batch_size)
                     sess.run(autoencoder_optimizer, feed_dict={x_input: batch_x, x_target: batch_x})
                     sess.run(discriminator_optimizer,
                              feed_dict={x_input: batch_x, x_target: batch_x, real_distribution: z_real_dist})
@@ -276,7 +274,6 @@ def train(train_model=True):
                             feed_dict={x_input: batch_x, x_target: batch_x,
                                        real_distribution: z_real_dist})
                         writer.add_summary(summary, global_step=step)
-                        print('Hola')
                         print("Epoch: {}, iteration: {}".format(i, b))
                         print("Autoencoder Loss: {}".format(a_loss))
                         print("Discriminator Loss: {}".format(d_loss))
