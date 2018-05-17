@@ -32,17 +32,16 @@ input_dim = mnist.shape[1]
 n_l1 = 1000
 n_l2 = 1000
 z_dim = 2
-#batch_size = 100
+batch_size = 26
 n_epochs = 100
 learning_rate = 0.001
 beta1 = 0.9
 results_path = './Results/Adversarial_Autoencoder'
 
-def ceil(a,b):
-    return -(-a//b)
-
-n_samples = mnist.shape[0]
-batch_size = ceil(n_samples, ceil(n_samples, 100))
+#def ceil(a,b):
+#    return -(-a//b)
+#n_samples = mnist.shape[0]
+#batch_size = ceil(n_samples, ceil(n_samples, 100))
 
 # Placeholders for input data and the targets
 x_input = tf.placeholder(dtype=tf.float32, shape=[batch_size, input_dim], name='Input')
