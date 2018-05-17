@@ -43,7 +43,7 @@ def ceil(a,b):
 
 n_samples = mnist.shape[0]
 n_batches = ceil(n_samples, ceil(n_samples, 100))
-
+batch_size = n_batches
 
 # Placeholders for input data and the targets
 x_input = tf.placeholder(dtype=tf.float32, shape=[batch_size, input_dim], name='Input')
