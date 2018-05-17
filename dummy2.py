@@ -260,7 +260,7 @@ def train(train_model=True):
             writer = tf.summary.FileWriter(logdir=tensorboard_path, graph=sess.graph)
             for i in range(n_epochs):
                 print("------------------Epoch {}/{}------------------".format(i, n_epochs))
-                for b in range(1, batch_size + 1):
+                for b in range(0, batch_size):
                     z_real_dist = np.random.randn(batch_size, z_dim) * 5.
                     batch_x = mnist[b * batch_size: (b+1) * batch_size]
                     print(b)
