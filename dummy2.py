@@ -265,6 +265,11 @@ def train(train_model=True):
                 for b in range(1, n_batches + 1):
                     z_real_dist = np.random.randn(batch_size, z_dim) * 5.
                     batch_x = mnist[b * n_batches: (b+1) * n_batches]
+                    print(b)
+                    print(n_batches)
+                    print(batch_x.shape)
+                    print(x_input.shape)
+                    print(x_target.shape)
                     sess.run(autoencoder_optimizer, feed_dict={x_input: batch_x, x_target: batch_x})
                     sess.run(discriminator_optimizer,
                              feed_dict={x_input: batch_x, x_target: batch_x, real_distribution: z_real_dist})
