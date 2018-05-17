@@ -46,9 +46,12 @@ n_batches = ceil(n_samples, ceil(n_samples, 100))
 
 
 # Placeholders for input data and the targets
-x_input = tf.placeholder(dtype=tf.float32, shape=[batch_size, input_dim], name='Input')
-x_target = tf.placeholder(dtype=tf.float32, shape=[batch_size, input_dim], name='Target')
-real_distribution = tf.placeholder(dtype=tf.float32, shape=[batch_size, z_dim], name='Real_distribution')
+x_input = tf.placeholder(dtype=tf.float32, shape=[99, input_dim], name='Input')
+x_target = tf.placeholder(dtype=tf.float32, shape=[99, input_dim], name='Target')
+real_distribution = tf.placeholder(dtype=tf.float32, shape=[99, z_dim], name='Real_distribution')
+#x_input = tf.placeholder(dtype=tf.float32, shape=[batch_size, input_dim], name='Input')
+#x_target = tf.placeholder(dtype=tf.float32, shape=[batch_size, input_dim], name='Target')
+#real_distribution = tf.placeholder(dtype=tf.float32, shape=[batch_size, z_dim], name='Real_distribution')
 decoder_input = tf.placeholder(dtype=tf.float32, shape=[1, z_dim], name='Decoder_input')
 
 def next_batch(self, batch_size, fake_data=False):
