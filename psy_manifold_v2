@@ -20,6 +20,7 @@ for x in range(len(dirlist)):
 os.chdir("/content/Adversarial_Autoencoder")
 sha1=a1.shape[0]
 sha2=a1.shape[1]
+sha3=a1.shape[2]
 
 # Progressbar
 # bar = progressbar.ProgressBar(widgets=['[', progressbar.Timer(), ']', progressbar.Bar(), '(', progressbar.ETA(), ')'])
