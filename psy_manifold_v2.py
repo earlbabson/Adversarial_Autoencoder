@@ -16,11 +16,11 @@ mnist=np.zeros((len(dirlist),61*73*61))
 for x in range(len(dirlist)):
   img = nib.load(os.path.join("/content/ABIDE_data/Outputs/cpac/nofilt_noglobal/reho/", dirlist[x]))
   a1 = np.array(img.dataobj)
-  mnist[x,] = np.reshape(a1,(1, 61*73*61))
+  sha1=a1.shape[0]
+  sha2=a1.shape[1]
+  sha3=a1.shape[2]
+  mnist[x,] = np.reshape(a1,(1, sha1*sha2*sha3))
 os.chdir("/content/Adversarial_Autoencoder")
-sha1=a1.shape[0]
-sha2=a1.shape[1]
-sha3=a1.shape[2]
 
 # Progressbar
 # bar = progressbar.ProgressBar(widgets=['[', progressbar.Timer(), ']', progressbar.Bar(), '(', progressbar.ETA(), ')'])
@@ -119,7 +119,7 @@ def generate_image_grid(sess, op):
         z = np.reshape(z, (1, 2))
         x = sess.run(op, feed_dict={decoder_input: z})
         ax = plt.subplot(g)
-        img = np.array(x.tolist()).reshape(sha1, sha2)
+        img = np.array(x.tolist()).reshape(sha1, sha2,sha3)
         ax.imshow(img, cmap='gray')
         ax.set_xticks([])
         ax.set_yticks([])
