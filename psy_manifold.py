@@ -16,10 +16,11 @@ mnist=np.zeros((len(dirlist),3721))
 for x in range(len(dirlist)):
   img = nib.load(os.path.join("/content/ABIDE_data/Outputs/cpac/nofilt_noglobal/reho/", dirlist[x]))
   a1 = np.array(img.dataobj)[:,32,:]
-  mnist[x,] = a1.ravel()
+  sha1=a1.shape[0]
+  sha2=a1.shape[1]
+  mnist[x,] = np.reshape(a1,(1, sha1*sha2))
 os.chdir("/content/Adversarial_Autoencoder")
-sha1=a1.shape[0]
-sha2=a1.shape[1]
+mnist = (mnist - np.mean(mnist)) / np.std(mnist)
 
 # Progressbar
 # bar = progressbar.ProgressBar(widgets=['[', progressbar.Timer(), ']', progressbar.Bar(), '(', progressbar.ETA(), ')'])
