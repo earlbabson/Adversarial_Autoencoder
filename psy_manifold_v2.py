@@ -21,7 +21,7 @@ for x in range(len(dirlist)):
   sha3=a1.shape[2]
   mnist[x,] = np.reshape(a1,(1, sha1*sha2*sha3))
 os.chdir("/content/Adversarial_Autoencoder")
-mnist = (mnist - mean(mnist)) / std(mnist)
+mnist = (mnist - np.mean(mnist)) / np.std(mnist)
 
 # Progressbar
 # bar = progressbar.ProgressBar(widgets=['[', progressbar.Timer(), ']', progressbar.Bar(), '(', progressbar.ETA(), ')'])
