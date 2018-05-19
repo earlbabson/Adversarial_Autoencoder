@@ -1,4 +1,4 @@
-import tensorflow as tf
+mport tensorflow as tf
 import numpy as np
 import datetime
 import os
@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 from matplotlib import gridspec
 import nibabel as nib
 from skimage import transform 
-#from tensorflow.examples.tutorials.mnist import input_data
+#from tensorflow.examples.tutorials.image_dataset import input_data
 
 #os.chdir("..")
 #!git clone https://github.com/danielcanueto/abide
@@ -16,35 +16,35 @@ dirlist=os.listdir("/content/ABIDE_data/Outputs/cpac/nofilt_noglobal/reho/")
 sha1=21
 sha2=24
 sha3=21
-mnist=np.zeros((len(dirlist),sha1*sha2*sha3))
+image_dataset=np.zeros((len(dirlist),sha1*sha2*sha3))
 for x in range(len(dirlist)):
   img = nib.load(os.path.join("/content/ABIDE_data/Outputs/cpac/nofilt_noglobal/reho/", dirlist[x]))
-  a1 = np.array(img.dataobj)
+  image = np.array(img.dataobj)
   image = transform.resize(image, (sha1, sha2,sha3))
-  mnist[x,] = np.reshape(a1,(1, sha1*sha2*sha3),image)
+  image_dataset[x,] = np.reshape(image,(1, sha1*sha2*sha3))
 os.chdir("/content/Adversarial_Autoencoder")
-mnist = (mnist - np.mean(mnist)) / np.std(mnist)
+image_dataset = (image_dataset - np.mean(image_dataset)) / np.std(image_dataset)
 
 # Progressbar
 # bar = progressbar.ProgressBar(widgets=['[', progressbar.Timer(), ']', progressbar.Bar(), '(', progressbar.ETA(), ')'])
 
-# Get the MNIST data
-#mnist = input_data.read_data_sets('./Data', one_hot=True)
+# Get the image_dataset data
+#image_dataset = input_data.read_data_sets('./Data', one_hot=True)
 
 # Parameters
-input_dim = mnist.shape[1]
+input_dim = image_dataset.shape[1]
 n_l1 = 1000
 n_l2 = 1000
 z_dim = 2
 batch_size = 104
-n_epochs = 1000
+n_epochs = 200
 learning_rate = 0.001
 beta1 = 0.9
 results_path = './Results/Adversarial_Autoencoder'
 
 #def ceil(a,b):
 #    return -(-a//b)
-#n_samples = mnist.shape[0]
+#n_samples = image_dataset.shape[0]
 #batch_size = ceil(n_samples, ceil(n_samples, 100))
 
 # Placeholders for input data and the targets
@@ -263,11 +263,11 @@ def train(train_model=True):
             sess.run(init)
             writer = tf.summary.FileWriter(logdir=tensorboard_path, graph=sess.graph)
             for i in range(n_epochs):
-                n_batches = int(mnist.shape[0] / batch_size)
+                n_batches = int(image_dataset.shape[0] / batch_size)
                 print("------------------Epoch {}/{}------------------".format(i, n_epochs))
                 for b in range(0, n_batches):
                     z_real_dist = np.random.randn(batch_size, z_dim) * 5.
-                    batch_x = mnist[b * batch_size: (b+1) * batch_size]
+                    batch_x = image_dataset[b * batch_size: (b+1) * batch_size]
                     sess.run(autoencoder_optimizer, feed_dict={x_input: batch_x, x_target: batch_x})
                     sess.run(discriminator_optimizer,
                              feed_dict={x_input: batch_x, x_target: batch_x, real_distribution: z_real_dist})
@@ -299,3 +299,4 @@ def train(train_model=True):
 
 if __name__ == '__main__':
     train(train_model=True)
+
