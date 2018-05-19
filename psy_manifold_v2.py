@@ -13,10 +13,10 @@ from skimage import transform
 #os.chdir("abide")
 #!python3 download_abide_preproc.py -d reho -p cpac -s nofilt_noglobal -o '/content/ABIDE_data'
 dirlist=os.listdir("/content/ABIDE_data/Outputs/cpac/nofilt_noglobal/reho/")
-mnist=np.zeros((len(dirlist),sha1*sha2*sha3))
 sha1=21
-  sha2=24
-  sha3=21
+sha2=24
+sha3=21
+mnist=np.zeros((len(dirlist),sha1*sha2*sha3))
 for x in range(len(dirlist)):
   img = nib.load(os.path.join("/content/ABIDE_data/Outputs/cpac/nofilt_noglobal/reho/", dirlist[x]))
   a1 = np.array(img.dataobj)
