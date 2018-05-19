@@ -38,7 +38,7 @@ n_l2 = 1000
 z_dim = 2
 batch_size = 104
 n_epochs = 200
-learning_rate = 0.001
+learning_rate = 0.0001
 beta1 = 0.9
 results_path = './Results/Adversarial_Autoencoder'
 
