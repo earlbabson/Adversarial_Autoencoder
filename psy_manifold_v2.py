@@ -5,6 +5,7 @@ import os
 import matplotlib.pyplot as plt
 from matplotlib import gridspec
 import nibabel as nib
+from skimage import transform 
 #from tensorflow.examples.tutorials.mnist import input_data
 
 #os.chdir("..")
@@ -12,14 +13,15 @@ import nibabel as nib
 #os.chdir("abide")
 #!python3 download_abide_preproc.py -d reho -p cpac -s nofilt_noglobal -o '/content/ABIDE_data'
 dirlist=os.listdir("/content/ABIDE_data/Outputs/cpac/nofilt_noglobal/reho/")
-mnist=np.zeros((len(dirlist),61*73*61))
+mnist=np.zeros((len(dirlist),sha1*sha2*sha3))
+sha1=21
+  sha2=24
+  sha3=21
 for x in range(len(dirlist)):
   img = nib.load(os.path.join("/content/ABIDE_data/Outputs/cpac/nofilt_noglobal/reho/", dirlist[x]))
   a1 = np.array(img.dataobj)
-  sha1=a1.shape[0]
-  sha2=a1.shape[1]
-  sha3=a1.shape[2]
-  mnist[x,] = np.reshape(a1,(1, sha1*sha2*sha3))
+  image = transform.resize(image, (sha1, sha2,sha3))
+  mnist[x,] = np.reshape(a1,(1, sha1*sha2*sha3),image)
 os.chdir("/content/Adversarial_Autoencoder")
 mnist = (mnist - np.mean(mnist)) / np.std(mnist)
 
@@ -28,7 +30,7 @@ mnist = (mnist - np.mean(mnist)) / np.std(mnist)
 
 # Get the MNIST data
 #mnist = input_data.read_data_sets('./Data', one_hot=True)
-print(mnist.shape)
+
 # Parameters
 input_dim = mnist.shape[1]
 n_l1 = 1000
@@ -36,7 +38,7 @@ n_l2 = 1000
 z_dim = 2
 batch_size = 104
 n_epochs = 1000
-learning_rate = 0.0001
+learning_rate = 0.001
 beta1 = 0.9
 results_path = './Results/Adversarial_Autoencoder'
 
