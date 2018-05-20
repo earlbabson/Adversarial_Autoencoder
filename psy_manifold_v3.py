@@ -22,7 +22,7 @@ for x in range(len(dirlist)):
   image = np.array(img.dataobj)
   image = transform.resize(image, (sha1, sha2,sha3))
   image_dataset[x,] = np.reshape(image,(1, sha1*sha2*sha3))
-os.chdir("/content/Adversarial_Autoencoder")
+os.chdir("Adversarial_Autoencoder")
 image_dataset = (image_dataset - np.mean(image_dataset)) / np.std(image_dataset)
 
 # Progressbar
