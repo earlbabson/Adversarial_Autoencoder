@@ -74,7 +74,7 @@ def generate_image_grid(sess, op,saved_model_path):
         ax.set_yticks([])
         ax.set_aspect('auto')
     plt.show()
-    fig.savefig(saved_model_path+'/graph.png')
+    plt.savefig(saved_model_path+'/graph.png')
 
 
 def dense(x, n1, n2, name):
