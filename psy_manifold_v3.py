@@ -36,7 +36,7 @@ n_l1 = 1000
 n_l2 = 1000
 z_dim = 2
 batch_size = 104
-n_epochs = 40
+n_epochs = 20
 learning_rate = 0.0001
 beta1 = 0.9
 results_path = ''
@@ -122,6 +122,7 @@ def generate_image_grid(sess, op):
         x = sess.run(op, feed_dict={decoder_input: z})
         ax = plt.subplot(g)
         img = np.array(x.tolist()).reshape(sha1, sha2,sha3)
+        img = img[:,32,:]
         ax.imshow(img, cmap='gray')
         ax.set_xticks([])
         ax.set_yticks([])
