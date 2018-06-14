@@ -233,7 +233,7 @@ def train(train_model=True):
                             log.write("Discriminator Loss: {}\n".format(d_loss))
                             log.write("Generator Loss: {}\n".format(g_loss))
                     step += 1
-
+                generate_image_grid(sess, op=decoder_image)
                 saver.save(sess, save_path=saved_model_path, global_step=step)
         else:
             # Get the latest results folder
@@ -244,7 +244,3 @@ def train(train_model=True):
 
 if __name__ == '__main__':
     train(train_model=True)
-    all_results = os.listdir(results_path)
-    all_results.sort()
-    saver.restore(sess, save_path=tf.train.latest_checkpoint(results_path + '/' + all_results[-1] + '/Saved_models/'))
-    generate_image_grid(sess, op=decoder_image)
