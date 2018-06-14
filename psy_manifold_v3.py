@@ -12,13 +12,13 @@ from skimage import transform
 #!git clone https://github.com/danielcanueto/abide
 #os.chdir("abide")
 #!python3 download_abide_preproc.py -d reho -p cpac -s nofilt_noglobal -o '/content/ABIDE_data'
-dirlist=os.listdir("ABIDE_data/Outputs/cpac/nofilt_noglobal/reho/")
+dirlist=os.listdir("/content/ABIDE_data/Outputs/cpac/nofilt_noglobal/reho/")
 sha1=21
 sha2=24
 sha3=21
 image_dataset=np.zeros((len(dirlist),sha1*sha2*sha3))
 for x in range(len(dirlist)):
-  img = nib.load(os.path.join("ABIDE_data/Outputs/cpac/nofilt_noglobal/reho/", dirlist[x]))
+  img = nib.load(os.path.join("/content/ABIDE_data/Outputs/cpac/nofilt_noglobal/reho/", dirlist[x]))
   image = np.array(img.dataobj)
   image = transform.resize(image, (sha1, sha2,sha3))
   image_dataset[x,] = np.reshape(image,(1, sha1*sha2*sha3))
