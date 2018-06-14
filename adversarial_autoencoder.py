@@ -19,7 +19,7 @@ n_l1 = 1000
 n_l2 = 1000
 z_dim = 2
 batch_size = 100
-n_epochs = 100
+n_epochs = 10
 learning_rate = 0.001
 beta1 = 0.9
 results_path = './Results/Adversarial_Autoencoder'
@@ -60,7 +60,7 @@ def generate_image_grid(sess, op,saved_model_path):
     y_points = np.arange(-10, 10, 1.5).astype(np.float32)
 
     nx, ny = len(x_points), len(y_points)
-    fig=plt.subplot()
+    plt.subplot()
     gs = gridspec.GridSpec(nx, ny, hspace=0.05, wspace=0.05)
 
     for i, g in enumerate(gs):
