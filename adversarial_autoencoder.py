@@ -18,7 +18,7 @@ n_l1 = 1000
 n_l2 = 1000
 z_dim = 2
 batch_size = 100
-n_epochs = 100
+n_epochs = 40
 learning_rate = 0.001
 beta1 = 0.9
 results_path = './Results/Adversarial_Autoencoder'
@@ -244,3 +244,7 @@ def train(train_model=True):
 
 if __name__ == '__main__':
     train(train_model=True)
+    all_results = os.listdir(results_path)
+    all_results.sort()
+    saver.restore(sess, save_path=tf.train.latest_checkpoint(results_path + '/' + all_results[-1] + '/Saved_models/'))
+    generate_image_grid(sess, op=decoder_image)
