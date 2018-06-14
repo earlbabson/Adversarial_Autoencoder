@@ -290,7 +290,7 @@ def train(train_model=True):
                     step += 1
 
                 saver.save(sess, save_path=saved_model_path, global_step=step)
-              generate_image_grid(sess, op=decoder_image)
+            generate_image_grid(sess, op=decoder_image)
         else:
             # Get the latest results folder
             all_results = os.listdir(results_path)
