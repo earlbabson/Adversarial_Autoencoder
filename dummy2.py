@@ -260,9 +260,5 @@ def train(train_model=True):
             plt.show()
             plt.savefig(results_path+'/graph2.png')
 
-        else:
-            # Get the latest results folder
-            
-
 if __name__ == '__main__':
     train(train_model=True)
