@@ -3,6 +3,7 @@ import numpy as np
 import datetime
 import os
 import matplotlib.pyplot as plt
+from pylab import savefig
 from matplotlib import gridspec
 from tensorflow.examples.tutorials.mnist import input_data
 
