@@ -250,7 +250,7 @@ def train(train_model=True):
             for i, g in enumerate(gs):
                 z = np.concatenate(([x_points[int(i / ny)]], [y_points[int(i % nx)]]))
                 z = np.reshape(z, (1, 2))
-                x = sess.run(ddecoder_image, feed_dict={decoder_input: z})
+                x = sess.run(decoder_image, feed_dict={decoder_input: z})
                 ax = plt.subplot(g)
                 img = np.array(x.tolist()).reshape(28, 28)
                 ax.imshow(img, cmap='gray')
