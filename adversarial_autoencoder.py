@@ -17,8 +17,8 @@ input_dim = 784
 n_l1 = 1000
 n_l2 = 1000
 z_dim = 2
-batch_size = 5
-n_epochs = 10
+batch_size = 100
+n_epochs = 100
 learning_rate = 0.001
 beta1 = 0.9
 results_path = './Results/Adversarial_Autoencoder'
@@ -48,7 +48,7 @@ def form_results():
     return tensorboard_path, saved_model_path, log_path
 
 
-def generate_image_grid(sess, op):
+def generate_image_grid(sess, op,saved_model_path):
     """
     Generates a grid of images by passing a set of numbers to the decoder and getting its output.
     :param sess: Tensorflow Session required to get the decoder output
@@ -59,7 +59,7 @@ def generate_image_grid(sess, op):
     y_points = np.arange(-10, 10, 1.5).astype(np.float32)
 
     nx, ny = len(x_points), len(y_points)
-    plt.subplot()
+    fig=plt.subplot()
     gs = gridspec.GridSpec(nx, ny, hspace=0.05, wspace=0.05)
 
     for i, g in enumerate(gs):
@@ -72,7 +72,8 @@ def generate_image_grid(sess, op):
         ax.set_xticks([])
         ax.set_yticks([])
         ax.set_aspect('auto')
-    plt.show(block=True)
+    plt.show()
+    fig.savefig(saved_model_path+'/graph.png')
 
 
 def dense(x, n1, n2, name):
