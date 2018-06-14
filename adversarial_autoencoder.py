@@ -18,7 +18,7 @@ n_l1 = 1000
 n_l2 = 1000
 z_dim = 2
 batch_size = 100
-n_epochs = 40
+n_epochs = 5
 learning_rate = 0.001
 beta1 = 0.9
 results_path = './Results/Adversarial_Autoencoder'
@@ -233,8 +233,9 @@ def train(train_model=True):
                             log.write("Discriminator Loss: {}\n".format(d_loss))
                             log.write("Generator Loss: {}\n".format(g_loss))
                     step += 1
-                generate_image_grid(sess, op=decoder_image)
                 saver.save(sess, save_path=saved_model_path, global_step=step)
+                print(generate_image_grid(sess, op=decoder_image))
+
         else:
             # Get the latest results folder
             all_results = os.listdir(results_path)
