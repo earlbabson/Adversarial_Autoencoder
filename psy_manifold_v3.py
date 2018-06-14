@@ -22,7 +22,6 @@ for x in range(len(dirlist)):
   image = np.array(img.dataobj)
   image = transform.resize(image, (sha1, sha2,sha3))
   image_dataset[x,] = np.reshape(image,(1, sha1*sha2*sha3))
-os.chdir("Adversarial_Autoencoder")
 image_dataset = (image_dataset - np.mean(image_dataset)) / np.std(image_dataset)
 
 # Progressbar
@@ -40,7 +39,7 @@ batch_size = 104
 n_epochs = 40
 learning_rate = 0.0001
 beta1 = 0.9
-results_path = './Results/Adversarial_Autoencoder'
+results_path = ''
 
 #def ceil(a,b):
 #    return -(-a//b)
