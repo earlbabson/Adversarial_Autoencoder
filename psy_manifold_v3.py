@@ -122,7 +122,7 @@ def generate_image_grid(sess, op):
         x = sess.run(op, feed_dict={decoder_input: z})
         ax = plt.subplot(g)
         img = np.array(x.tolist()).reshape(sha1, sha2,sha3)
-        img = img[:,32,:]
+        img = img[:,12,:]
         ax.imshow(img, cmap='gray')
         ax.set_xticks([])
         ax.set_yticks([])
