@@ -19,7 +19,7 @@ n_l1 = 1000
 n_l2 = 1000
 z_dim = 2
 batch_size = 100
-n_epochs = 10
+n_epochs = 5
 learning_rate = 0.001
 beta1 = 0.9
 results_path = './Results/Adversarial_Autoencoder'
@@ -236,13 +236,10 @@ def train(train_model=True):
                             log.write("Generator Loss: {}\n".format(g_loss))
                     step += 1
                 saver.save(sess, save_path=saved_model_path, global_step=step)
-                generate_image_grid(sess, op=decoder_image,saved_model_path=saved_model_path)
-
-        else:
-            # Get the latest results folder
-            all_results = os.listdir(results_path)
+                all_results = os.listdir(results_path)
             all_results.sort()
             saver.restore(sess, save_path=tf.train.latest_checkpoint(results_path + '/' + all_results[-1] + '/Saved_models/'))
+           
             x_points = np.arange(-10, 10, 1.5).astype(np.float32)
             y_points = np.arange(-10, 10, 1.5).astype(np.float32)
 
@@ -253,7 +250,7 @@ def train(train_model=True):
             for i, g in enumerate(gs):
                 z = np.concatenate(([x_points[int(i / ny)]], [y_points[int(i % nx)]]))
                 z = np.reshape(z, (1, 2))
-                x = sess.run(op, feed_dict={decoder_input: z})
+                x = sess.run(ddecoder_image, feed_dict={decoder_input: z})
                 ax = plt.subplot(g)
                 img = np.array(x.tolist()).reshape(28, 28)
                 ax.imshow(img, cmap='gray')
@@ -261,7 +258,11 @@ def train(train_model=True):
                 ax.set_yticks([])
                 ax.set_aspect('auto')
             plt.show()
-            plt.savefig(saved_model_path+'/graph2.png')
+            plt.savefig(results_path+'/graph2.png')
+
+        else:
+            # Get the latest results folder
+            
 
 if __name__ == '__main__':
     train(train_model=True)
