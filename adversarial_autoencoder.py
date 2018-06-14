@@ -59,7 +59,7 @@ def generate_image_grid(sess, op):
     y_points = np.arange(-10, 10, 1.5).astype(np.float32)
 
     nx, ny = len(x_points), len(y_points)
-    ff=plt.subplot()
+    plt.subplot()
     gs = gridspec.GridSpec(nx, ny, hspace=0.05, wspace=0.05)
 
     for i, g in enumerate(gs):
@@ -72,8 +72,7 @@ def generate_image_grid(sess, op):
         ax.set_xticks([])
         ax.set_yticks([])
         ax.set_aspect('auto')
-    ff=plt.show()
-    ff.savefig( "test.png")
+    plt.show(block=True)
 
 
 def dense(x, n1, n2, name):
